@@ -19,7 +19,7 @@ class DebtList extends StatelessWidget {
                 return DebtCard(container: container);
               },
             ).toList(),
-            AddDebtCard(),
+            const AddDebtCard(),
           ],
         );
       },

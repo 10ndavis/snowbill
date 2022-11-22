@@ -1,5 +1,4 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snowbill/providers/snowball_provider.dart';
@@ -21,21 +20,21 @@ class AddDebtCard extends StatelessWidget {
                 context: context,
                 isScrollControlled: true,
                 builder: (BuildContext context) {
-                  return AddDebtSheet();
+                  return const AddDebtSheet();
                 },
               );
             },
             child: DottedBorder(
-              radius: Radius.circular(8),
+              radius: const Radius.circular(8),
               color: Theme.of(context).cardColor,
-              dashPattern: [20, 5],
+              dashPattern: const [20, 5],
               strokeWidth: 2,
               borderType: BorderType.RRect,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text('Add a Debt'),
                   ],
                 ),

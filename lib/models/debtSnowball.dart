@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:snowbill/models/debt.dart';
 import 'package:snowbill/models/debt_calculation_container.dart';
 

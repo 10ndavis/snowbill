@@ -42,8 +42,8 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Color background = Color.fromRGBO(38, 42, 62, 1);
-    Color accentColor = Color.fromRGBO(89, 207, 206, 1);
+    Color background = const Color.fromRGBO(38, 42, 62, 1);
+    Color accentColor = const Color.fromRGBO(89, 207, 206, 1);
     return FutureBuilder(
       future: initLocalStorage,
       builder: (context, AsyncSnapshot<bool> asyncSnapshot) {
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             title: 'Snowbill',
             theme: ThemeData(
               backgroundColor: background,
-              cardColor: Color.fromRGBO(52, 56, 76, 1),
+              cardColor: const Color.fromRGBO(52, 56, 76, 1),
               colorScheme: Theme.of(context).colorScheme.copyWith(secondary: accentColor),
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ButtonStyle(
@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
             ),
             home: Scaffold(
               backgroundColor: background,
-              body: tabIndex == 0 ? DebtListScreen() : GraphScreen(),
+              body: tabIndex == 0 ? const DebtListScreen() : const GraphScreen(),
               bottomNavigationBar: CircleNavBar(
                 activeIcons: [
                   Icon(
@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                 ],
-                color: Color.fromRGBO(52, 56, 76, 1),
+                color: const Color.fromRGBO(52, 56, 76, 1),
                 height: 60,
                 circleWidth: 60,
                 activeIndex: tabIndex,

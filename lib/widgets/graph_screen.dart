@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +32,7 @@ class GraphScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Text('${entry.value.debt.name}'),
+                    child: Text(entry.value.debt.name),
                   ),
                 ],
               ),
@@ -79,7 +78,7 @@ class GraphScreen extends StatelessWidget {
                             return PieChartSectionData(
                               color: calculateColor(index),
                               value: currentDebt.debt.remainingBalance / snowballProvider.snowball.totalDebt,
-                              title: '${currencyFormatter.format(currentDebt.debt.remainingBalance)}',
+                              title: currencyFormatter.format(currentDebt.debt.remainingBalance),
                               // radius: radius,
                               titleStyle: const TextStyle(
                                 // fontSize: fontSize,
