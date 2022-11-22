@@ -40,13 +40,28 @@ class DebtSnowball {
       return DebtCalculationContainer(debt: debt);
     }).toList();
 
+    double monthlyExtra = extra;
+    double paidOffExtra = 0;
     double carryOver = 0;
 
     for (int i = 0; i < longestPayoff.remainingPayments(); i++) {
-      carryOver += extra;
+      // at the beginning of each month, add the one time monthly payment
+      // this includes an "extra" as well as prior paid off debts
+      monthlyExtra = extra + paidOffExtra;
+
       for (DebtCalculationContainer debt in calculators) {
+        // if the debt has a balance, we need to make a payment
         if (debt.hasBalance) {
-          carryOver = debt.makePayment(extra: carryOver);
+          // make a payment, and keep any carry over
+          carryOver = debt.makePayment(extra: monthlyExtra + carryOver);
+
+          // set monthly back to zero since it can only be used once a month
+          monthlyExtra = 0;
+
+          if (!debt.hasBalance) {
+            // if the debt is now paid off, we need to apply that payment amount to our monthly payment for this bill
+            paidOffExtra += debt.debt.monthlyPayment;
+          }
         }
       }
     }
