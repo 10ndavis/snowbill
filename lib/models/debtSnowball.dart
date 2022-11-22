@@ -28,7 +28,7 @@ class DebtSnowball {
     // if there are no debts, return an empty list
     if (debts.isEmpty) return [];
 
-    debts.sort((debtOne, debtTwo) => (debtOne.remainingPayments() - debtTwo.remainingPayments()).ceil());
+    debts.sort((debtOne, debtTwo) => (debtOne.remainingBalance - debtTwo.remainingBalance).ceil());
     List<DebtCalculationContainer> calculators = debts.map((Debt debt) {
       return DebtCalculationContainer(debt: debt);
     }).toList();
