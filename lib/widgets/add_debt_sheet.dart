@@ -78,7 +78,7 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                 TextField(
                   controller: monthlyPayment,
                   style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   keyboardAppearance: Brightness.dark,
                   textInputAction: TextInputAction.next,
                   cursorColor: Theme.of(context).colorScheme.secondary,
@@ -94,7 +94,7 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                   cursorColor: Theme.of(context).colorScheme.secondary,
                   controller: remainingBalance,
                   style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   keyboardAppearance: Brightness.dark,
                   textInputAction: TextInputAction.done,
                   decoration: const InputDecoration(

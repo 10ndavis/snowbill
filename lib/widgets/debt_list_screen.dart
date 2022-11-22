@@ -40,7 +40,9 @@ class _DebtListScreenState extends State<DebtListScreen> {
     try {
       double numVal = double.parse(extraValue.text);
       snowballProvider.updateExtraPayment(numVal);
-    } catch (e) {}
+    } catch (e) {
+      // do nothing
+    }
   }
 
   @override
@@ -69,7 +71,7 @@ class _DebtListScreenState extends State<DebtListScreen> {
                               child: TextField(
                                 controller: extraValue,
                                 cursorColor: Theme.of(context).colorScheme.secondary,
-                                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                 style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                                 keyboardAppearance: Brightness.dark,
                                 decoration: const InputDecoration(
@@ -84,7 +86,7 @@ class _DebtListScreenState extends State<DebtListScreen> {
                           ],
                         ),
                       ),
-                      DebtList(),
+                      const DebtList(),
                     ],
                   ),
                 ),
