@@ -28,14 +28,21 @@ class DebtSnowball {
     // if there are no debts, return an empty list
     if (debts.isEmpty) return [];
 
+    // sort by payments to get the highest number of payments
+    debts.sort((debtOne, debtTwo) => (debtOne.remainingPayments() - debtTwo.remainingPayments()).ceil());
+    Debt longestPayoff = debts.last;
+
+    // sort by remaining balance, to get proper order to display on the UI and run the snowball
+    // calculations against
     debts.sort((debtOne, debtTwo) => (debtOne.remainingBalance - debtTwo.remainingBalance).ceil());
+
     List<DebtCalculationContainer> calculators = debts.map((Debt debt) {
       return DebtCalculationContainer(debt: debt);
     }).toList();
 
     double carryOver = 0;
 
-    for (int i = 0; i < debts.last.remainingPayments(); i++) {
+    for (int i = 0; i < longestPayoff.remainingPayments(); i++) {
       carryOver += extra;
       for (DebtCalculationContainer debt in calculators) {
         if (debt.hasBalance) {
