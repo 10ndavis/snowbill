@@ -189,8 +189,15 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                         child: formComplete
                             ? SizedBox(
                                 child: ElevatedButton(
-                                  child:
-                                      widget.container != null ? const Text('Update') : const Text('Add to Snowball'),
+                                  child: widget.container != null
+                                      ? Text(
+                                          'Update',
+                                          style: TextStyle(color: Theme.of(context).backgroundColor),
+                                        )
+                                      : Text(
+                                          'Add to Snowball',
+                                          style: TextStyle(color: Theme.of(context).backgroundColor),
+                                        ),
                                   onPressed: () {
                                     if (widget.container != null) {
                                       Provider.of<SnowballProvider>(context, listen: false).updateDebt(
