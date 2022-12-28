@@ -15,7 +15,6 @@ class AddDebtCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
           child: GestureDetector(
             onTap: () {
-              // snowballProvider.addDebt(Debt(monthlyPayment: 200, remainingBalance: 2000, name: 'test'));
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,

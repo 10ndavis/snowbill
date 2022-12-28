@@ -12,10 +12,11 @@ class DebtSnowball {
     extra = json['extra'];
     debts = jsonDebts.values.map<Debt>((dynamic debt) {
       return Debt(
-        monthlyPayment: debt['monthlyPayment'],
-        remainingBalance: debt['remainingBalance'],
-        name: debt['name'],
-      );
+          monthlyPayment: debt['monthlyPayment'],
+          remainingBalance: debt['remainingBalance'],
+          name: debt['name'],
+          createdAt: DateTime.parse(debt['createdAt']),
+          interestRate: debt['interestRate']);
     }).toList();
   }
 
@@ -43,6 +44,8 @@ class DebtSnowball {
     double monthlyExtra = extra;
     double paidOffExtra = 0;
     double carryOver = 0;
+
+    // TODO: make this work with interest
 
     for (int i = 0; i < longestPayoff.remainingPayments(); i++) {
       // at the beginning of each month, add the one time monthly payment

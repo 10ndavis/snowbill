@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snowbill/models/debt_calculation_container.dart';
 import 'package:snowbill/providers/snowball_provider.dart';
 
 import '../models/debt.dart';
 
 class AddDebtSheet extends StatefulWidget {
-  const AddDebtSheet({Key? key}) : super(key: key);
+  const AddDebtSheet({Key? key, this.container}) : super(key: key);
+
+  final DebtCalculationContainer? container;
 
   @override
   State<AddDebtSheet> createState() => _AddDebtSheetState();
@@ -18,10 +21,23 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
 
   final TextEditingController remainingBalance = TextEditingController();
 
-  bool get formComplete => name.text.isNotEmpty && monthlyPayment.text.isNotEmpty && remainingBalance.text.isNotEmpty;
+  final TextEditingController interestRate = TextEditingController();
+
+  bool get formComplete =>
+      name.text.isNotEmpty &&
+      monthlyPayment.text.isNotEmpty &&
+      remainingBalance.text.isNotEmpty &&
+      interestRate.text.isNotEmpty;
 
   @override
   void initState() {
+    if (widget.container != null) {
+      name.text = widget.container!.debt.name;
+      monthlyPayment.text = widget.container!.debt.monthlyPayment.toStringAsFixed(2);
+      remainingBalance.text = widget.container!.debt.remainingBalance.toStringAsFixed(2);
+      interestRate.text = widget.container!.debt.interestRate.toStringAsFixed(2);
+    }
+
     name.addListener(() {
       setState(() {
         // set state on update
@@ -35,6 +51,12 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
     });
 
     remainingBalance.addListener(() {
+      setState(() {
+        // set state on update
+      });
+    });
+
+    interestRate.addListener(() {
       setState(() {
         // set state on update
       });
@@ -67,10 +89,15 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                   keyboardType: TextInputType.name,
                   keyboardAppearance: Brightness.dark,
                   textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
-                    hintText: 'Name',
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    label: const Text('Name'),
+                    hintStyle: const TextStyle(
                       color: Colors.white30,
+                    ),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                     border: InputBorder.none,
                   ),
@@ -82,9 +109,20 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                   keyboardAppearance: Brightness.dark,
                   textInputAction: TextInputAction.next,
                   cursorColor: Theme.of(context).colorScheme.secondary,
-                  decoration: const InputDecoration(
-                    hintText: 'Monthly Payment',
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    prefixText: '\$',
+                    prefixStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    label: const Text('Monthly Payment with Interest'),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    hintStyle: const TextStyle(
                       color: Colors.white30,
                     ),
                     border: InputBorder.none,
@@ -97,9 +135,46 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                   keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   keyboardAppearance: Brightness.dark,
                   textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration(
-                    hintText: 'Balance Remaining',
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    prefixText: '\$',
+                    prefixStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    label: const Text('Balance Remaining with Interest'),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    hintStyle: const TextStyle(
+                      color: Colors.white30,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+                TextField(
+                  cursorColor: Theme.of(context).colorScheme.secondary,
+                  controller: interestRate,
+                  style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardAppearance: Brightness.dark,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    label: const Text('Interest Rate'),
+                    suffixText: '%',
+                    suffixStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    hintStyle: const TextStyle(
                       color: Colors.white30,
                     ),
                     border: InputBorder.none,
@@ -112,15 +187,31 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                     child: formComplete
                         ? SizedBox(
                             child: ElevatedButton(
-                              child: const Text('Add to Snowball'),
+                              child: widget.container != null ? const Text('Update') : const Text('Add to Snowball'),
                               onPressed: () {
-                                Provider.of<SnowballProvider>(context, listen: false).addDebt(
-                                  Debt(
-                                    monthlyPayment: double.parse(monthlyPayment.text),
-                                    name: name.text,
-                                    remainingBalance: double.parse(remainingBalance.text),
-                                  ),
-                                );
+                                if (widget.container != null) {
+                                  Provider.of<SnowballProvider>(context, listen: false).updateDebt(
+                                    widget.container!.debt,
+                                    Debt(
+                                      monthlyPayment: double.parse(monthlyPayment.text),
+                                      name: name.text,
+                                      remainingBalance: double.parse(remainingBalance.text),
+                                      createdAt: widget.container!.debt.createdAt,
+                                      interestRate: double.parse(interestRate.text),
+                                    ),
+                                  );
+                                } else {
+                                  Provider.of<SnowballProvider>(context, listen: false).addDebt(
+                                    Debt(
+                                      monthlyPayment: double.parse(monthlyPayment.text),
+                                      name: name.text,
+                                      remainingBalance: double.parse(remainingBalance.text),
+                                      createdAt: DateTime.now(),
+                                      interestRate: double.parse(interestRate.text),
+                                    ),
+                                  );
+                                }
+
                                 Navigator.pop(context);
                               },
                             ),

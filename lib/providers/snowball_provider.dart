@@ -38,6 +38,18 @@ class SnowballProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateDebt(Debt oldDebt, Debt newDebt) {
+    List<Debt>? found = _snowball?.debts.where((Debt item) => item == oldDebt).toList();
+    if (found?.isNotEmpty == true) {
+      Debt foundDebt = found!.first;
+      foundDebt.name = newDebt.name;
+      foundDebt.remainingBalance = newDebt.remainingBalance;
+      foundDebt.monthlyPayment = newDebt.monthlyPayment;
+      saveToStorage();
+      notifyListeners();
+    }
+  }
+
   void deleteDebt(Debt debt) {
     _snowball?.debts.remove(debt);
     saveToStorage();
