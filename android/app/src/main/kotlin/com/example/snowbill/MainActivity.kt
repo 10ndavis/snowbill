@@ -1,4 +1,4 @@
-package com.example.snowbill
+package com.elvenstudios.snowbill
 
 import io.flutter.embedding.android.FlutterActivity
 
