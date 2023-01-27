@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Snowbill/models/debt_calculation_container.dart';
-import 'package:Snowbill/providers/snowball_provider.dart';
+import 'package:snowbill/models/debt_calculation_container.dart';
+import 'package:snowbill/providers/snowball_provider.dart';
 
 import '../models/debt.dart';
 
@@ -246,7 +246,7 @@ class _AddDebtSheetState extends State<AddDebtSheet> {
                           Navigator.of(context).pop();
                           Provider.of<SnowballProvider>(context, listen: false).deleteDebt(widget.container!.debt);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete,
                           color: Colors.redAccent,
                         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Snowbill/providers/snowball_provider.dart';
-import 'package:Snowbill/widgets/debt_list.dart';
+import 'package:snowbill/providers/snowball_provider.dart';
+import 'package:snowbill/widgets/bottom_ad.dart';
+import 'package:snowbill/widgets/debt_list.dart';
 
 class DebtListScreen extends StatefulWidget {
   const DebtListScreen({Key? key}) : super(key: key);
@@ -61,6 +62,7 @@ class _DebtListScreenState extends State<DebtListScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      BottomAd(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: Row(
