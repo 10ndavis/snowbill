@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
-import 'package:snowbill/models/debt.dart';
-import 'package:snowbill/models/debt_calculation_container.dart';
+import 'package:Snowbill/models/debt.dart';
+import 'package:Snowbill/models/debt_calculation_container.dart';
 
 class DebtSnowball {
   DebtSnowball();

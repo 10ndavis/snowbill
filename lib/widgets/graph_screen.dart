@@ -2,8 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:snowbill/models/debt_calculation_container.dart';
-import 'package:snowbill/providers/snowball_provider.dart';
+import 'package:Snowbill/models/debt_calculation_container.dart';
+import 'package:Snowbill/providers/snowball_provider.dart';
 
 class GraphScreen extends StatelessWidget {
   const GraphScreen({Key? key}) : super(key: key);

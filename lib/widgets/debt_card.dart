@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snowbill/models/debt_calculation_container.dart';
-import 'package:snowbill/providers/snowball_provider.dart';
-import 'package:snowbill/widgets/add_debt_sheet.dart';
+import 'package:Snowbill/models/debt_calculation_container.dart';
+import 'package:Snowbill/providers/snowball_provider.dart';
+import 'package:Snowbill/widgets/add_debt_sheet.dart';
 
 class DebtCard extends StatelessWidget {
   const DebtCard({Key? key, required this.container}) : super(key: key);

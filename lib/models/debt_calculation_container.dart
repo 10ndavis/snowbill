@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:snowbill/models/debt.dart';
+import 'package:Snowbill/models/debt.dart';
 
 class DebtCalculationContainer {
   DebtCalculationContainer({required this.debt}) {

@@ -1,4 +1,4 @@
-name: snowbill
+name: Snowbill
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -62,7 +62,10 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/snowbill.png"
+  image_path_android: "images/snowbill_foreground.png"
+  adaptive_icon_foreground: "images/snowbill_foreground.png"
+  adaptive_icon_background: "images/snowbill_background.png"
+  image_path_ios: "images/snowbill.png"
   remove_alpha_ios: true
 
 # The following section is specific to Flutter packages.
