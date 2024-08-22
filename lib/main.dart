@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:snowbill/providers/snowball_provider.dart';
+import 'package:snowbill/providers/subscription_provider.dart';
 import 'package:snowbill/widgets/debt_list_screen.dart';
 import 'package:snowbill/widgets/graph_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SnowballProvider()),
+        ChangeNotifierProvider(create: (_) => SubscriptionProvider()),
       ],
       builder: (context, child) {
         return const MyApp();

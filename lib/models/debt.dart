@@ -13,6 +13,7 @@ class Debt {
   double interestRate;
 
   double remainingPayments({double extra = 0}) {
+    if (remainingBalance == 0 || monthlyPayment == 0) return 0;
     return remainingBalance / (monthlyPayment + extra);
   }
 

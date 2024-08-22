@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:snowbill/models/debt_calculation_container.dart';
 import 'package:snowbill/providers/snowball_provider.dart';
-import 'package:snowbill/widgets/bottom_ad.dart';
 
 class GraphScreen extends StatelessWidget {
   const GraphScreen({Key? key}) : super(key: key);
@@ -55,7 +54,6 @@ class GraphScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                const BottomAd(),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(

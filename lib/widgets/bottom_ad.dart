@@ -60,7 +60,7 @@ class _BottomAdState extends State<BottomAd> {
   @override
   Widget build(BuildContext context) {
     return HideIfPaid(
-      child: Container(
+      childBuilder: () => Container(
         alignment: Alignment.center,
         width: size.width.toDouble(),
         height: size.height.toDouble(),
