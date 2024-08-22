@@ -62,7 +62,7 @@ class _DebtListScreenState extends State<DebtListScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      BottomAd(),
+                      const BottomAd(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: Row(
