@@ -17,6 +17,20 @@ class Debt {
     return remainingBalance / (monthlyPayment + extra);
   }
 
+  // gets the remainingInterest
+  double get remainingInterest {
+    // Step 1: Calculate the Monthly Interest Rate
+    double monthlyInterestRate = interestRate / 12 / 100;
+
+    // Step 2: Calculate the Monthly Interest Payment
+    double monthlyInterestPayment = remainingBalance * monthlyInterestRate;
+
+    // Step 3: Estimate the Remaining Interest (Approximate)
+    double approximateRemainingInterest = monthlyInterestPayment * remainingPayments();
+
+    return approximateRemainingInterest;
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'monthlyPayment': monthlyPayment,

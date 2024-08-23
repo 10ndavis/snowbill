@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:snowbill/models/debt.dart';
-import 'package:snowbill/models/debtSnowball.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:snowbill/models/debt.dart';
+import 'package:snowbill/models/debtSnowball.dart';
 
 class SnowballProvider with ChangeNotifier {
   SharedPreferences? _prefs;
@@ -45,6 +45,7 @@ class SnowballProvider with ChangeNotifier {
       foundDebt.name = newDebt.name;
       foundDebt.remainingBalance = newDebt.remainingBalance;
       foundDebt.monthlyPayment = newDebt.monthlyPayment;
+      foundDebt.interestRate = newDebt.interestRate;
       saveToStorage();
       notifyListeners();
     }

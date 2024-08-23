@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snowbill/models/debt_calculation_container.dart';
 import 'package:snowbill/providers/snowball_provider.dart';
 import 'package:snowbill/widgets/add_debt_sheet.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class DebtCard extends StatelessWidget {
   const DebtCard({Key? key, required this.container}) : super(key: key);
@@ -66,25 +66,46 @@ class DebtCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'est: ${container.payoffMonthString} (${container.totalPayments} mo)',
+                        'Payoff: ${container.payoffMonthString} (${container.totalPayments} mo)',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          '\$${container.debt.monthlyPayment.toStringAsFixed(2)}/mo',
-                          style: Theme.of(context).textTheme.bodySmall,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Remaining: ',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              TextSpan(
+                                text: '\$${container.debt.remainingBalance.toStringAsFixed(2)}',
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.redAccent),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        '\$${container.debt.remainingBalance.toStringAsFixed(2)}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Interest Saved: ',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              TextSpan(
+                                text: '\$${container.interestSaved.toStringAsFixed(2)}',
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.greenAccent),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

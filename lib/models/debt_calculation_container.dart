@@ -1,5 +1,5 @@
-import 'package:snowbill/models/debt.dart';
 import 'package:intl/intl.dart';
+import 'package:snowbill/models/debt.dart';
 
 class DebtCalculationContainer {
   DebtCalculationContainer({required this.debt}) {
@@ -9,6 +9,20 @@ class DebtCalculationContainer {
   Debt debt;
   late double balance;
   int totalPayments = 0;
+
+  // gets the interest saved
+  double get interestSaved {
+    // Step 1: Calculate the Monthly Interest Rate
+    double monthlyInterestRate = debt.interestRate / 12 / 100;
+
+    // Step 2: Calculate the Monthly Interest Payment
+    double monthlyInterestPayment = debt.remainingBalance * monthlyInterestRate;
+
+    // Step 3: Estimate the Remaining Interest (Approximate)
+    double approximateInterestPaid = monthlyInterestPayment * totalPayments;
+
+    return debt.remainingInterest - approximateInterestPaid;
+  }
 
   String get payoffMonthString {
     DateTime today = DateTime.now();
